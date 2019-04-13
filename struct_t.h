@@ -1,5 +1,5 @@
-#ifndef __STACK_T_H
-#define __STACK_T_H
+#ifndef __STRUCT_T_H
+#define __STRUCT_T_H
 #include <string.h>
 int un = 1;
 struct stack_t{
@@ -43,6 +43,12 @@ void push(struct stack_t* stack, char* filename){
   stack->head = Newelement;
   stack->length++;
 }
+struct args_t{ /* permet de récupérer les arguments */
+  int nthreads;
+  int consonne;
+  char *output;
+  struct stack_t *input;
+};
 
 
 
