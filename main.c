@@ -30,3 +30,25 @@ struct args_t init_args(int argc, char *argv[]){
     push(arguments->input, argv[optind]);
   return arguments;
 }
+void consumer_routine(){
+  while(){
+
+  }
+};
+void producer_routine(stack_t args){
+  char *buf = malloc(32);
+  while (args->input->length != 0){
+    int fd = open(args->input->head, O_RDONLY);
+    if (fd == -1){
+      exit(EXIT_FAILURE)
+    }
+    while(read(fd, buf, 32) > 0){
+      sem_wait(&empty);
+      pthread_mutex_lock(&mutex);
+    /*Insert in the buffer*/
+      insert_item();
+      pthread_mutex_unlock(&mutex);
+      sem_post(&full);
+  }
+  args.pop();
+}
