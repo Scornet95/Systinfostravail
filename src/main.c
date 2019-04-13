@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "main.h"
+#include "include/main.h"
 
 int main(int argc, char const *argv[]) {
   ; /*declare l'argument args_t afin d'avoir les arguments en ordre */
