@@ -13,11 +13,11 @@ struct node { /*créer un noeud dans la pile reprenant les files*/
 };
 
 int pop(struct stack_t* stack){
-  if (stack->head == NULL){
+  if (stack->head->filename == NULL){
     return 0;
   }
   if (stack->head->next == NULL){
-    stack->head = NULL;
+    stack->head->filename = NULL;
     stack->length--;
     free(stack->head);
     return 0;
