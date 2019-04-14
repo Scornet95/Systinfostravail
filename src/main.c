@@ -1,9 +1,11 @@
 #include <stdio.h>
 #include <stdlib.h>
+
+#include "include/buffer.h"
 #include "include/main.h"
 
 int main(int argc, char const *argv[]) {
-  ; /*declare l'argument args_t afin d'avoir les arguments en ordre */
+  return 0; /*declare l'argument args_t afin d'avoir les arguments en ordre */
 
 };
 
@@ -25,10 +27,11 @@ struct args_t init_args(int argc, char *argv[]){
         strcopy(arguments->output, optarg);
         break;
     }
+    for (; optind < argc; optind++){
+      push(arguments->input, argv[optind]);
+    return arguments;
   }
-  for (; optind < argc; optind++){
-    push(arguments->input, argv[optind]);
-  return arguments;
+
 }
 void consumer_routine(){
   while(){

@@ -10,7 +10,7 @@ LIB=lib.a
 all: cracker $(OBJ) $(LIB)
 
 cracker: src/main.c $(OBJ) $(LIB)
-	$(CC) $(CFLAGS) src/main.c $(LIB) $(OBJ) -o cracker
+	$(CC) $(CFLAGS) src/main.c $(LIB) $(OBJ) -lpthreads -o cracker 
 
 $(LIB): $(LIB_FILES)
 	$(CC) $(CFLAGS) -c $(LIB_FILES)
