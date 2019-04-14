@@ -1,57 +1,49 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <unistd.h>
+#include <getopt.h>
 
-#include "include/buffer.h"
-#include "include/main.h"
 
-int main(int argc, char const *argv[]) {
-  return 0; /*declare l'argument args_t afin d'avoir les arguments en ordre */
+#include "main.h"
+#include "stack.h"
 
-};
+int main(int argc, char *argv[]) {
+  Arg struc  =  init_args(argc, argv);
+  printf("%d\n",struc.nthreads);
+  printf("%s\n", struc.output);
+  printf("%d\n", struc.consonne);
+  char * str = stack_pop(struc.input, struc.input->size);
+  printf("%s",str);
+  return 0;
+}
 
 struct args_t init_args(int argc, char *argv[]){
   int opt;
-  struct args_t* arguments = malloc(sizeof(struct args_t));
-  if arguments== NULL{
-    exit(EXIT_FAILURE);
-  }
-  while ((opt = getopt(argc, argv, "t:o:c"))){
+  stack_t* stack = stack_init();
+
+  Arg arguments = {
+    1,
+    0,
+    "stdout",
+    stack
+  };
+
+  while ((opt = getopt(argc, argv, ":ct:o:")) !=-1){
     switch(opt){
-      case 't':
-        arguments->nthreads = (int) optarg;
-        break;
+      case 't' :
+       arguments.nthreads = atoi(optarg);
+       break;
       case 'c':
-        arguments->consonne = true;
+        arguments.consonne = 1;
         break;
       case 'o' :
-        strcopy(arguments->output, optarg);
+        arguments.output = malloc(sizeof(char)*strlen(optarg)+1);
+        strcpy(arguments.output, optarg);
         break;
     }
-    for (; optind < argc; optind++){
-      push(arguments->input, argv[optind]);
-    return arguments;
   }
-
-}
-void consumer_routine(){
-  while(){
-
+  for(;optind<argc;optind++){
+    stack_push(arguments.input,argv[optind], strlen(argv[optind]));
   }
-};
-void producer_routine(stack_t args){
-  char *buf = malloc(32);
-  while (args->input->length != 0){
-    int fd = open(args->input->head, O_RDONLY);
-    if (fd == -1){
-      exit(EXIT_FAILURE)
-    }
-    while(read(fd, buf, 32) > 0){
-      sem_wait(&empty);
-      pthread_mutex_lock(&mutex);
-    /*Insert in the buffer*/
-      insert_item();
-      pthread_mutex_unlock(&mutex);
-      sem_post(&full);
-  }
-  args.pop();
+  return arguments;
 }

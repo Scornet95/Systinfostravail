@@ -3,18 +3,18 @@ AR=ar
 CFLAGS=-Wall -Werror -DC99 -ICTester -g -std=c99
 
 LIB_FILES=src/lib/reverse.c src/lib/sha256.c
-SRC=src/consumer.c src/producer.c src/buffer.c
+OBJ=stack.o producer.o
+SRC=src/producer.c src/stack.c
 
-LIB=lib.a
+LIB=reverse.o sha256.o
 
 all: cracker $(OBJ) $(LIB)
 
 cracker: src/main.c $(OBJ) $(LIB)
-	$(CC) $(CFLAGS) src/main.c $(LIB) $(OBJ) -lpthreads -o cracker 
+	$(CC) $(CFLAGS) src/main.c $(LIB) $(OBJ) -lpthread -o cracker
 
 $(LIB): $(LIB_FILES)
 	$(CC) $(CFLAGS) -c $(LIB_FILES)
-	$(AR) r $(LIB) reverse.o sha256.o
 
 $(OBJ): $(SRC)
 	$(CC) $(CFLAGS) -c $(SRC)
