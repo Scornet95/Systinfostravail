@@ -8,7 +8,6 @@
 #include "stack.h"
 
 int main(int argc, char *argv[]) {
-  Arg struc  =  init_args(argc, argv);
 
   return 0;
 }

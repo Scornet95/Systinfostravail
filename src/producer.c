@@ -4,31 +4,35 @@
 #include <string.h>
 #include <pthread.h>
 #include <semaphore.h>
-
+#include "stack.h"
 #include "include/producer.h"
 
-typedef struct arg_prod_cons{
+typedef struct arg_prod_cons_t{
   stack_t *stack_file;
-  int in=0;
-  int out=0;
+  int in;
+  int out;
   int numb_threads;
-  uint8_t* buffer[32];
+  uint8_t  **buffer;
   int consonne;
-}
+}arg_prod_cons;
 
-int ajoutByte_Prod(uint8_t *t, uint8_t * tab[], int tailleTab){
-  tab[out]=t;
-  if(out==0 && in !=0){
-    in= in-1;
+int ajoutByte_Prod(uint8_t *t, uint8_t * tab[], int tailleTab, arg_prod_cons arg){
+  tab[arg.out]=t;
+  if(arg.out==0 && arg.in !=0){
+    arg.in= arg.in-1;
   }
-  out = (out+1) %tailleTab;
+  arg.out = (arg.out+1) % arg.numb_threads;
   return 9;
 }
 
-void producer_routine(void* arg){
-  char*fichier=(char*)arg;
-  uint8_t *buf = malloc(32);
-  FILE* f = fopen(fichier, "rb");
+void producer_routine(arg_prod_cons arg){
+  arg.buffer = malloc(sizeof(uint8_t)*2*arg.numb_threads*32);
+  arg.in = 0;
+  arg.out = 0;
+  while (arg.stack_file->size != 0){
+    char *fichier = stack_pop(arg.stack_file, strlen(arg.stack_file->head->data));
+    uint8_t *buf = malloc(32);
+      FILE* f = fopen(fichier, "rb");
     if (f == NULL){
       exit(EXIT_FAILURE);
     }
@@ -37,8 +41,9 @@ void producer_routine(void* arg){
       j=j+1;
       //sem_wait(&empty);
       //pthread_mutex_lock(&mutex);
-      ajoutByte_Prod(buf, buffer, 10);
+      ajoutByte_Prod(buf, arg.buffer, 2*arg.numb_threads, arg);
       //pthread_mutex_unlock(&mutex);
       //sem_post(&full);
+    }
   }
 }
