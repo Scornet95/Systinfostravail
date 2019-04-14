@@ -3,6 +3,7 @@
 
 #include "stack.h"
 
+
 stack_t* stack_init(void) {
 	stack_t* s = (stack_t*) malloc(sizeof(stack_t));
 	s->head = NULL;

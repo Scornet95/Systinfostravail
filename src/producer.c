@@ -1,4 +1,5 @@
 #include <stdlib.h>
+#include <stdio.h>
 #include <stdint.h>
 #include <string.h>
 #include <pthread.h>
@@ -6,10 +7,14 @@
 
 #include "include/producer.h"
 
-
-int in=0;
-int out=0;
-uint8_t* buffer[32];
+typedef struct arg_prod_cons{
+  stack_t *stack_file;
+  int in=0;
+  int out=0;
+  int numb_threads;
+  uint8_t* buffer[32];
+  int consonne;
+}
 
 int ajoutByte_Prod(uint8_t *t, uint8_t * tab[], int tailleTab){
   tab[out]=t;
@@ -22,7 +27,7 @@ int ajoutByte_Prod(uint8_t *t, uint8_t * tab[], int tailleTab){
 
 void producer_routine(void* arg){
   char*fichier=(char*)arg;
-  char *buf = malloc(32);
+  uint8_t *buf = malloc(32);
   FILE* f = fopen(fichier, "rb");
     if (f == NULL){
       exit(EXIT_FAILURE);
@@ -36,16 +41,4 @@ void producer_routine(void* arg){
       //pthread_mutex_unlock(&mutex);
       //sem_post(&full);
   }
-}
-
-
-void main(int argc, char* argv[]) {
-  producer_routine(argv[1]);
-//  for (int i = 0; i < 10; i++) {
-    for (int i = 0; i < 10; i++){
-      for(int j=0;j<32;j++){
-              printf("%d", buffer[i][j]);
-      }
-    }
-    printf("\n");
 }
