@@ -1,12 +1,4 @@
-#include <stdlib.h>
-#include <stdio.h>
-#include <stdint.h>
-#include <string.h>
-#include <pthread.h>
-#include <semaphore.h>
-
-#include "include/stack.h"
-#include "include/buffer.h"
+#include "producer.h"
 
 
 

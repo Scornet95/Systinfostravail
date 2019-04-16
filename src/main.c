@@ -1,19 +1,16 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <unistd.h>
-#include <getopt.h>
-
-
 #include "include/main.h"
-#include "include/stack.h"
-#include "include/buffer.h"
-#include "include/producer.h"
+
 
 int main(int argc, char *argv[]) {
-  printf("gsgsgsgs");
+  printf("1");
   Arg arg = init_args(argc, argv);
+  printf("1");
+
   init_buf(arg.nthreads);
+  printf("1");
+
   producer_routine(arg.input);
+  printf("1");
 
   for(int i=0; i<10; i =i+1){
     for(int j=0;j<10; j=j+1){
@@ -26,7 +23,6 @@ int main(int argc, char *argv[]) {
 struct args_t init_args(int argc, char *argv[]){
   int opt;
   stack_t* stack = stack_init();
-
   Arg arguments = {
     1,
     0,

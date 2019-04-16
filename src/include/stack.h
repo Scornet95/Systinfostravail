@@ -2,6 +2,8 @@
 #define __STACK_H
 
 #include <string.h>
+#include <stdlib.h>
+
 
 typedef struct stack_t stack_t;
 typedef struct stack_node_t stack_node_t;

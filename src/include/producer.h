@@ -1,6 +1,14 @@
 #ifndef __PRODUCER_H
 #define __PRODUCER_H
+#include <stdlib.h>
+#include <stdio.h>
+#include <stdint.h>
+#include <string.h>
+#include <pthread.h>
+#include <semaphore.h>
 
+#include "stack.h"
+#include "buffer.h"
 
 #include "stack.h"
 

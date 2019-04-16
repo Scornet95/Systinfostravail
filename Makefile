@@ -1,23 +1,20 @@
 CC=gcc
-AR=ar
-CFLAGS=-Wall -Werror -DC99 -ICTester -g -std=c99
+INCF=src/include
+CFLAGS=-Wall -Werror -DC99 -ICTester -g -std=c99 -I $(INCF)
 
-LIB_FILES=src/lib/reverse.c src/lib/sha256.c
-OBJ=stack.o producer.o buffer.o  main.o
-SRC=src/producer.c  src/stack.c src/buffer.c src/main.c
 
-LIB=reverse.o sha256.o
+OBJ=buffer.o stack.o producer.o reverse.o sha256.o
+SRC= src/buffer.c src/stack.c src/producer.c src/reverse.c src/sha256.c
 
-all: cracker $(OBJ) $(LIB)
 
-cracker: src/main.c $(OBJ) $(LIB)
-	$(CC)  $(CFLAGS) -c src/main.c $(LIB) $(OBJ) -lpthread -o cracker
+all: $(OBJ) cracker
 
-$(LIB): $(LIB_FILES)
-	$(CC) $(CFLAGS) -c $(LIB_FILES)
-
-$(OBJ): $(SRC)
+cracker : src/main.c $(OBJ)
+	$(CC) $(CFLAGS) src/main.c -o cracker $(OBJ)
+#%.o : %.c
+$(OBJ) : $(SRC)
 	$(CC) $(CFLAGS) -c $(SRC)
 
-clean:
-	rm *.o *.a cracker
+
+#clean:
+#	rm *.o *.a cracker
