@@ -9,24 +9,17 @@
 #include "include/prod_cons.h"
 
 int main(int argc, char *argv[]) {
- Arg arg = init_args(argc, argv);
- arg_prod_cons_t arg1= {
-   arg->input,
-   0,
-   0,
-   arg->nthreads,
-   NULL,
-   arg->consonne,
- };
-  producer_routine(arg1);
-  for(int j=0;j<20;j++){
-    for(int i=0;i<20;i++){
-          printf("%d", arg1.buffer[i][j]);
+  Arg arg = init_args(argc, argv);
+  init_buf(arg.tailleTab);
+  producer_routine(arg.input);
+
+  for(int i=0; i<10; i =i+1){
+    for(int j=0;j<10; j=j+1){
+      printf("%d", tab_circulaire->buffer)
     }
   }
   return 0;
 }
-//void init_struct(){
 //  Arg init = malloc(sizeof(struct args_t));
 //  init.nthreads=1;
 //  init.consonne=0;
