@@ -7,10 +7,12 @@
 #include "include/main.h"
 #include "include/stack.h"
 #include "include/buffer.h"
+#include "include/producer.h"
 
 int main(int argc, char *argv[]) {
+  printf("gsgsgsgs");
   Arg arg = init_args(argc, argv);
-  init_buf(arg.tailleTab);
+  init_buf(arg.nthreads);
   producer_routine(arg.input);
 
   for(int i=0; i<10; i =i+1){

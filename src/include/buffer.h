@@ -1,5 +1,13 @@
-#ifndef __MAIN_H
-#define __MAIN_H
+#ifndef __BUFFER_H
+#define __BUFFER_H
+
+#include <stdlib.h>
+#include <stdio.h>
+#include <stdint.h>
+#include <string.h>
+#include <pthread.h>
+#include <semaphore.h>
+
 #include "stack.h"
 
 typedef struct arg_buffer_t{

@@ -8,6 +8,7 @@
 
 #include "include/buffer.h"
 
+
 void init_buf(int numb_threads){
   tab_circulaire = malloc(sizeof(arg_buffer_t));
   if (tab_circulaire == NULL){

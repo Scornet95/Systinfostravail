@@ -9,7 +9,7 @@ typedef struct args_t {
   char *output;
   stack_t *input;
 } Arg;
- 
+
 struct args_t init_args(int argc, char *argv[]);
 
 #endif
