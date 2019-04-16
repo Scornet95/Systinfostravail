@@ -6,7 +6,7 @@
 
 #include "include/main.h"
 #include "include/stack.h"
-#include "include/prod_cons.h"
+#include "include/buffer.h"
 
 int main(int argc, char *argv[]) {
   Arg arg = init_args(argc, argv);
@@ -15,17 +15,12 @@ int main(int argc, char *argv[]) {
 
   for(int i=0; i<10; i =i+1){
     for(int j=0;j<10; j=j+1){
-      printf("%d", tab_circulaire->buffer)
+      printf("%d", tab_circulaire->buffer[i][j]);
     }
   }
   return 0;
 }
-//  Arg init = malloc(sizeof(struct args_t));
-//  init.nthreads=1;
-//  init.consonne=0;
-//  init.output=NULL;
-//  init.input= stack_init();
-//}
+
 struct args_t init_args(int argc, char *argv[]){
   int opt;
   stack_t* stack = stack_init();

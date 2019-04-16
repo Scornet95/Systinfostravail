@@ -4,6 +4,7 @@
 #include <string.h>
 #include <pthread.h>
 #include <semaphore.h>
+
 #include "include/stack.h"
 #include "include/buffer.h"
 #include "include/prod_cons.h"

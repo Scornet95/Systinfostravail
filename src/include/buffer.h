@@ -9,8 +9,9 @@ typedef struct arg_buffer_t{
   uint8_t  **buffer;
 }arg_buffer_t;
 
-struct arg_buffer_t tab_circulaire;
-void init_struct();
+struct arg_buffer_t* tab_circulaire;
+
+void init_buf(int numb_threads);
 
 void ajoutByte_Buff(uint8_t *t, uint8_t * tab[], int tailleTab, arg_buffer_t* arg);
 
