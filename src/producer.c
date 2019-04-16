@@ -4,19 +4,11 @@
 #include <string.h>
 #include <pthread.h>
 #include <semaphore.h>
-#include "stack.h"
-#include "include/producer.h"
+#include "include/stack.h"
 
-typedef struct arg_prod_cons_t{
-  stack_t *stack_file;
-  int in;
-  int out;
-  int numb_threads;
-  uint8_t  **buffer;
-  int consonne;
-}arg_prod_cons;
+#include "include/prod_cons.h"
 
-int ajoutByte_Prod(uint8_t *t, uint8_t * tab[], int tailleTab, arg_prod_cons arg){
+int ajoutByte_Prod(uint8_t *t, uint8_t * tab[], int tailleTab, arg_prod_cons_t arg){
   tab[arg.out]=t;
   if(arg.out==0 && arg.in !=0){
     arg.in= arg.in-1;
@@ -25,8 +17,11 @@ int ajoutByte_Prod(uint8_t *t, uint8_t * tab[], int tailleTab, arg_prod_cons arg
   return 9;
 }
 
-void producer_routine(arg_prod_cons arg){
-  arg.buffer = malloc(sizeof(uint8_t)*2*arg.numb_threads*32);
+void producer_routine(arg_prod_cons_t arg){
+  arg.buffer = malloc(sizeof(uint8_t)*2*arg.numb_threads);
+  for(int i=0; i<2*arg.numb_threads;i=i+1){
+    arg.buffer[i]=malloc(sizeof(uint8_t)*32);
+  }
   arg.in = 0;
   arg.out = 0;
   while (arg.stack_file->size != 0){

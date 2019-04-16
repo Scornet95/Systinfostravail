@@ -1,7 +1,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "stack.h"
+#include "include/stack.h"
 
 
 stack_t* stack_init(void) {

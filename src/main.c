@@ -4,14 +4,35 @@
 #include <getopt.h>
 
 
-#include "main.h"
-#include "stack.h"
+#include "include/main.h"
+#include "include/stack.h"
+#include "include/prod_cons.h"
 
 int main(int argc, char *argv[]) {
-
+ Arg arg = init_args(argc, argv);
+ arg_prod_cons_t arg1= {
+   arg->input,
+   0,
+   0,
+   arg->nthreads,
+   NULL,
+   arg->consonne,
+ };
+  producer_routine(arg1);
+  for(int j=0;j<20;j++){
+    for(int i=0;i<20;i++){
+          printf("%d", arg1.buffer[i][j]);
+    }
+  }
   return 0;
 }
-
+//void init_struct(){
+//  Arg init = malloc(sizeof(struct args_t));
+//  init.nthreads=1;
+//  init.consonne=0;
+//  init.output=NULL;
+//  init.input= stack_init();
+//}
 struct args_t init_args(int argc, char *argv[]){
   int opt;
   stack_t* stack = stack_init();
