@@ -1,17 +1,15 @@
 #ifndef __MAIN_H
 #define __MAIN_H
-
 #include "stack.h"
 
-typedef struct arg_buffer{
+typedef struct *arg_buffer_t{
   int in;
   int out;
-  int numb_threads;
+  int length;
   uint8_t  **buffer;
-  int consonne;
 }arg_buffer_t;
 
-void ini_struct();
+void init_struct();
 
 
 
