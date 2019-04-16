@@ -8,7 +8,7 @@
 
 #include "include/prod_cons.h"
 
-int ajoutByte_Prod(uint8_t *t, uint8_t * tab[], int tailleTab, arg_prod_cons_t arg){
+int ajoutByte_Prod(uint8_t *t, uint8_t * tab[], int tailleTab, arg_buffer_t* buffer){
   tab[arg.out]=t;
   if(arg.out==0 && arg.in !=0){
     arg.in= arg.in-1;
@@ -17,17 +17,11 @@ int ajoutByte_Prod(uint8_t *t, uint8_t * tab[], int tailleTab, arg_prod_cons_t a
   return 9;
 }
 
-void producer_routine(arg_prod_cons_t arg){
-  arg.buffer = malloc(sizeof(uint8_t)*2*arg.numb_threads);
-  for(int i=0; i<2*arg.numb_threads;i=i+1){
-    arg.buffer[i]=malloc(sizeof(uint8_t)*32);
-  }
-  arg.in = 0;
-  arg.out = 0;
-  while (arg.stack_file->size != 0){
-    char *fichier = stack_pop(arg.stack_file, strlen(arg.stack_file->head->data));
+void producer_routine(stack_t stack){
+  while (stack->size != 0){
+    char *fichier = stack_pop(stack, strlen(stack->head->data));
     uint8_t *buf = malloc(32);
-      FILE* f = fopen(fichier, "rb");
+    FILE* f = fopen(fichier, "rb");
     if (f == NULL){
       exit(EXIT_FAILURE);
     }
@@ -36,7 +30,7 @@ void producer_routine(arg_prod_cons_t arg){
       j=j+1;
       //sem_wait(&empty);
       //pthread_mutex_lock(&mutex);
-      ajoutByte_Prod(buf, arg.buffer, 2*arg.numb_threads, arg);
+      ajoutByte_Prod(buf, tab_circulaire->buffer, tab_circulaire->length, tab_circulaire);
       //pthread_mutex_unlock(&mutex);
       //sem_post(&full);
     }
