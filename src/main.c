@@ -6,13 +6,11 @@ int main(int argc, char *argv[]) {
   Arg arg = init_args(argc, argv);
   init_buf(arg.nthreads);
   pthread_t producer;
+  pthread_t consumer;
   pthread_create(&producer, NULL,producer_routine,(void *) arg.input);
-  sem_wait(&(tab_circulaire->full));
-  for(int i=0; i<tab_circulaire->length; i =i+1){
-    for(int j=0;j<32; j=j+1){
-      printf("%d, %d\n", tab_circulaire->buffer[i][j], tab_circulaire->length);
-    }
-  }
+  pthread_create(&consumer, NULL,consumer_routine,NULL);
+  pthread_join(producer,NULL);
+  pthread_join(consumer,NULL);
   return 0;
 }
 

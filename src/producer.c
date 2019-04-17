@@ -18,7 +18,8 @@ void* producer_routine(void* stack){
       sem_wait(&(tab_circulaire->empty));
       //pthread_mutex_lock(&mutex);
       pthread_mutex_lock(&(tab_circulaire->mutex));
-      ajoutByte_Buff(buf, tab_circulaire->buffer, tab_circulaire->length, tab_circulaire);
+      printf("%d", tab_circulaire->out);
+      ajoutByte_Buff(buf);
       //pthread_mutex_unlock(&mutex);
       pthread_mutex_unlock(&(tab_circulaire->mutex));
       //sem_post(&full);

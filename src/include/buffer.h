@@ -25,7 +25,7 @@ arg_buffer_t* tab_circulaire;
 
 void init_buf(int numb_threads);
 
-void ajoutByte_Buff(uint8_t *t, uint8_t * tab[], int tailleTab, arg_buffer_t* arg);
+void ajoutByte_Buff(uint8_t *t);
 
 uint8_t* delete_buff();
 

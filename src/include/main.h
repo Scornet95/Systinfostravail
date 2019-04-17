@@ -12,6 +12,7 @@
 #include "producer.h"
 #include "reverse.h"
 #include "sha256.h"
+#include "consumer.h"
 
 /* permet de récupérer les arguments */
 typedef struct args_t {
