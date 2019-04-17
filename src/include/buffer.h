@@ -7,17 +7,21 @@
 #include <string.h>
 #include <pthread.h>
 #include <semaphore.h>
-
 #include "stack.h"
+#include <pthread.h>
+#include <semaphore.h>
 
-typedef struct arg_buffer_t{
+typedef struct arg_buffer{
   int in;
   int out;
   int length;
+  sem_t empty;
+  sem_t full;
+  pthread_mutex_t mutex;
   uint8_t  **buffer;
 }arg_buffer_t;
 
-struct arg_buffer_t* tab_circulaire;
+arg_buffer_t* tab_circulaire;
 
 void init_buf(int numb_threads);
 

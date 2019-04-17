@@ -1,6 +1,6 @@
-
 #include "include/buffer.h"
-
+#include <semaphore.h>
+#include <pthread.h>
 
 void init_buf(int numb_threads){
   tab_circulaire = malloc(sizeof(arg_buffer_t));
@@ -8,6 +8,9 @@ void init_buf(int numb_threads){
     exit(EXIT_FAILURE);
   }
   tab_circulaire->length = (2*numb_threads);
+  sem_init(&(tab_circulaire->empty), 0, tab_circulaire->length);
+  sem_init(&(tab_circulaire->full), 0, 0);
+  pthread_mutex_init(&(tab_circulaire->mutex), NULL);
   tab_circulaire->in = 0;
   tab_circulaire->out = 0;
   tab_circulaire->buffer = malloc(sizeof(uint8_t *)*tab_circulaire->length);

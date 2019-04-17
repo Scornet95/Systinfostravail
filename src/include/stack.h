@@ -13,7 +13,7 @@ struct stack_node_t {
 	void* data;
 };
 
-struct stack_t {
+struct 	stack_t {
 	size_t size;
 	stack_node_t* head;
 };

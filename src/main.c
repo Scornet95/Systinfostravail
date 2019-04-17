@@ -1,5 +1,6 @@
 #include "include/main.h"
-
+#include <semaphore.h>
+#include <pthread.h>
 
 int main(int argc, char *argv[]) {
   printf("1");
@@ -8,13 +9,12 @@ int main(int argc, char *argv[]) {
 
   init_buf(arg.nthreads);
   printf("1");
-
-  producer_routine(arg.input);
+  pthread_t producer;
+  pthread_create(&producer, NULL,&(producer_routine),(void *) arg.input);
   printf("1");
-
-  for(int i=0; i<10; i =i+1){
-    for(int j=0;j<10; j=j+1){
-      printf("%d", tab_circulaire->buffer[i][j]);
+  for(int i=0; i<tab_circulaire->length; i =i+1){
+    for(int j=0;j<32; j=j+1){
+      printf("%d, %d\n", tab_circulaire->buffer[i][j], tab_circulaire->length);
     }
   }
   return 0;

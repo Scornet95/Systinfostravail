@@ -1,12 +1,12 @@
 #include "producer.h"
+#include <semaphore.h>
+#include <pthread.h>
 
 
-
-void producer_routine(stack_t *stack){
+void* producer_routine(stack_t* stack){
   while (stack->size != 0){
     char *fichier = stack_pop(stack, strlen(stack->head->data));
     uint8_t *buf = malloc(32);
-        printf("zeb\n");
     FILE* f = fopen(fichier, "rb");
 
     if (f == NULL){
@@ -14,10 +14,15 @@ void producer_routine(stack_t *stack){
     }
     while(fread(buf, 32, 1, f) > 0){
       //sem_wait(&empty);
+      sem_wait(&(tab_circulaire->empty));
       //pthread_mutex_lock(&mutex);
+      pthread_mutex_lock(&(tab_circulaire->mutex));
       ajoutByte_Buff(buf, tab_circulaire->buffer, tab_circulaire->length, tab_circulaire);
       //pthread_mutex_unlock(&mutex);
+      pthread_mutex_unlock(&(tab_circulaire->mutex));
       //sem_post(&full);
+      sem_post(&(tab_circulaire->full));
     }
   }
+  return 0;
 }

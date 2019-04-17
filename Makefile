@@ -1,6 +1,6 @@
 CC=gcc
 INCF=src/include
-CFLAGS=-Wall -Werror -DC99 -ICTester -g -std=c99 -I $(INCF)
+CFLAGS=-Wall -Werror -DC99 -pthread -ICTester -g -std=c99 -I $(INCF)
 
 
 OBJ=buffer.o stack.o producer.o reverse.o sha256.o
