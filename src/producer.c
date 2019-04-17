@@ -3,12 +3,13 @@
 #include <pthread.h>
 
 
-void* producer_routine(stack_t* stack){
-  while (stack->size != 0){
-    char *fichier = stack_pop(stack, strlen(stack->head->data));
+void* producer_routine(void* stack){
+  stack_t* new_stack = (stack_t*) stack;
+  while (new_stack->size != 0){
+    printf("hello, %p", new_stack->head->data);
+    char *fichier = stack_pop(new_stack, strlen(new_stack->head->data));
     uint8_t *buf = malloc(32);
     FILE* f = fopen(fichier, "rb");
-
     if (f == NULL){
       exit(EXIT_FAILURE);
     }

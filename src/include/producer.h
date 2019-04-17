@@ -12,6 +12,6 @@
 
 #include "stack.h"
 
-void* producer_routine(stack_t* stack);
+void* producer_routine(void* stack);
 
 #endif // __PRODUCER_H
