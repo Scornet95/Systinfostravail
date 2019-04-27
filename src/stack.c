@@ -58,7 +58,7 @@ void* stack_pop(stack_t* s, size_t data_size) {
 
 	free(old_head->data);
 	free(old_head);
-
+	
 	return ret;
 }
 
