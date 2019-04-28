@@ -2,46 +2,33 @@
 
 int main(int argc, char *argv[]) {
   Arg arg = init_args(argc, argv);
-  init_buf(arg.nthreads);
+  init_buf(arg.nthreads, arg.consonne);
   pthread_t producer;
   pthread_t consumer[arg.nthreads];
+  pthread_t consumer1;
   int err;
-
-  //printf("1\n");
-
- err = pthread_mutex_init(&(tab_circulaire->mutex),NULL);
-  if(err!=0){
-   printf("pthread_mutex_init");
-  }
-  
-  //printf("2\n");
-
-  err = sem_init(&(tab_circulaire->empty), 0, tab_circulaire->length-1);
-  if(err!=0){
-    printf("sem_init");
-  }
-
-  err = sem_init(&(tab_circulaire->full), 0, 0);
-  if(err!=0){
-    printf("sem_init");
-  }
-
-  //printf("3\n");
+  printf("1\n");
+  printf("%d",arg.nthreads);
 
   err = pthread_create(&(producer), NULL,producer_routine,(void *) arg.input);
   if(err!=0){
     printf("pthread_create producer");
   }
 
-  //printf("4\n");
+  printf("4\n");
 
 
   for(int j=0;j<arg.nthreads;j=j+1){
     err =   pthread_create(&(consumer[j]), NULL,consumer_routine,NULL);
-    printf("le numéro du thead %d\n", j);
+    //printf("le numéro du thead %d\n", j);
     if(err!=0){
-      printf("pthread_create consumer");
+      printf("pthread_create consumer_prod");
     }
+  }
+
+  err = pthread_create(&(consumer1), NULL, tri_String, NULL);
+  if(err!=0){
+    printf("pthread_create consumer1");
   }
 
   //printf("5\n");
@@ -52,16 +39,43 @@ int main(int argc, char *argv[]) {
     printf("pthread_join producer");
   }
 
-  //printf("6\n");
+  printf("premier join\n");
+  err = pthread_join(consumer1, NULL);
+  if(err!=0){
+    printf("pthread_join consumer");
+  }
 
+  printf("deuxième join\n");
+
+  printf("quid???");
   for(int l=0;l<arg.nthreads;l=l+1){
-    err = pthread_join((consumer[l]),NULL);
+    err = pthread_join(consumer[l],NULL);
+        printf("un l est join");
     if(err!=0){
-      printf("pthread_join consumer");
+      printf("pthread_join consumer_prod");
     }
   }
 
 
+
+  err = pthread_mutex_destroy(&(tab_circulaire->mutex));
+  if(err!=0){
+    printf("pthread_mutex_destroy mutex");
+  }
+  err = pthread_mutex_destroy(&(tab_circulaire->mutex1));
+  if(err!=0){
+    printf("pthread_mutex_destroy mutex1");
+  }
+  sem_destroy(&(tab_circulaire->empty));
+  sem_destroy(&(tab_circulaire->full));
+  sem_destroy(&(tab_circulaire->empty1));
+  sem_destroy(&(tab_circulaire->full1));
+
+  printf("troisième join\n");
+
+  print_stack(tab_circulaire->stack_fin);
+
+  free(tab_circulaire);
   return 0;
 }
 

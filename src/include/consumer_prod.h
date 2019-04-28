@@ -1,5 +1,5 @@
-#ifndef __CONSUMER_H
-#define __CONSUMER_H
+#ifndef __CONSUMER_PROD_H
+#define __CONSUMER_PROD_H
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>

@@ -13,6 +13,8 @@
 #include "reverse.h"
 #include "sha256.h"
 #include "consumer_prod.h"
+#include "consumer.h"
+
 #include <semaphore.h>
 #include <pthread.h>
 

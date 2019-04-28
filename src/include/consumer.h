@@ -1,0 +1,19 @@
+#ifndef __CONSUMER_H
+#define __CONSUMER_H
+#include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
+#include <getopt.h>
+#include <stdbool.h>
+#include <pthread.h>
+
+#include "buffer.h"
+#include "stack.h"
+
+void* tri_String();
+
+void print_stack(stack_t* s);
+
+int count(char* str, int consonne);
+
+#endif
