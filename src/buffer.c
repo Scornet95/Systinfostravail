@@ -1,7 +1,7 @@
 #include "include/buffer.h"
 
 
-void init_buf(int numb_threads, int consonne){
+void init_buf(int numb_threads, int consonne, int out_true, char* output){
   tab_circulaire = malloc(sizeof(arg_buffer_t));
   if (tab_circulaire == NULL){
     exit(EXIT_FAILURE);
@@ -13,7 +13,13 @@ void init_buf(int numb_threads, int consonne){
   tab_circulaire->boucle_cons=1;
   tab_circulaire->boucle_cons1=0;
   tab_circulaire->consonne = consonne;
+  tab_circulaire->out_true = out_true;
   tab_circulaire->stack_fin = stack_init();
+  tab_circulaire->file_out = malloc(sizeof(char)*strlen(output)+1);
+  if(tab_circulaire->file_out == NULL){
+    exit(EXIT_FAILURE);
+  }
+  memcpy(tab_circulaire->file_out, output, strlen(output)+1);
 
   int err;
 

@@ -7,25 +7,24 @@ void* consumer_routine(){
   while((tab_circulaire->boucle_cons)==1 || tab_circulaire->in!=tab_circulaire->out){
     int nbr=0;
     //printf("sem_wait_cons_prod full avant\n");
-    if(tab_circulaire->boucle_cons==0){
+    if(tab_circulaire->boucle_cons==0 && tab_circulaire->out < 2 ){
       if(nbr!=tab_circulaire->nbrt-1){
         tab_circulaire->boucle_cons1=tab_circulaire->boucle_cons1+1;
         nbr=nbr+1;
         return NULL;
-      }      
+      }
+    }
+    else if(tab_circulaire->boucle_cons==0 && tab_circulaire->in == tab_circulaire->out -2){
+      if(nbr!=tab_circulaire->nbrt-1){
+        tab_circulaire->boucle_cons1=tab_circulaire->boucle_cons1+1;
+        nbr=nbr+1;
+        return NULL;
+      }
     }
 
     sem_wait(&(tab_circulaire->full));
 
-    //printf("SE_WAIT_CONS_PROD FULL APRES\n");
-
-    //printf("mutex lock prod_cons avant\n");
-
     pthread_mutex_lock(&(tab_circulaire->mutex));
-
-    //que faire pour sortir les dernier thread.
-
-    //printf("MUTEX LOCK PROD_CONS APRES\n");
 
     char* res = malloc(sizeof(char)*16+1);
     uint8_t* tab32 = deleteByte_buff();

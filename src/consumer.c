@@ -49,8 +49,17 @@ void* tri_String(){
 // un méthhode print.
 
 void print_stack(stack_t* s){
-  while(stack_get_size(s)!=0){
-    printf("%s\n",(char *)stack_pop(s, strlen(tab_circulaire->stack_fin->head->data)));
+  if(tab_circulaire->out_true==1){
+     int file = open(tab_circulaire->file_out, O_WRONLY | O_CREAT);
+    while(stack_get_size(s)!=0){
+      write(file,(char *)stack_pop(s, strlen(tab_circulaire->stack_fin->head->data)+1),sizeof(char)*strlen(tab_circulaire->stack_fin->head->data)+1);
+    }
+    close(file);
+  }
+  else{
+    while(stack_get_size(s)!=0){
+      printf("%s\n",(char *)stack_pop(s, strlen(tab_circulaire->stack_fin->head->data)+1));
+    }
   }
     destroy_cons();
 }

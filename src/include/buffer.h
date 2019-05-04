@@ -19,9 +19,11 @@ typedef struct arg_buffer{
   int out1;
   int length;
   int nbrt;
+  int out_true;
   int boucle_cons;
   int boucle_cons1;
   int consonne;
+  char* file_out;
   stack_t* stack_fin;
   sem_t empty;
   sem_t full;
@@ -35,7 +37,7 @@ typedef struct arg_buffer{
 
 arg_buffer_t* tab_circulaire;
 
-void init_buf(int numb_threads, int consonne);
+void init_buf(int numb_threads, int consonne, int arg_output, char* output);
 
 void ajoutByte_buff(uint8_t *t);
 

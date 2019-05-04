@@ -22,6 +22,7 @@
 typedef struct args_t {
   int nthreads;
   int consonne;
+  int out;
   char *output;
   stack_t *input;
 } Arg;
