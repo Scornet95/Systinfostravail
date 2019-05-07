@@ -12,10 +12,10 @@
 #include <fcntl.h>
 #include <string.h>
 
-#include "buffer.h"
+#include "buffer1.h"
 #include "stack.h"
 
-void* tri_String();
+void* tri_String(void * tru1);
 
 void print_stack(stack_t* s);
 

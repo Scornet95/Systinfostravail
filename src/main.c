@@ -2,62 +2,63 @@
 
 int main(int argc, char *argv[]) {
   Arg arg = init_args(argc, argv);
-  init_buf(arg.nthreads, arg.consonne, arg.out, arg.output);
+  init_buf(arg.nthreads);
+  //init_buf_string(arg.nthreads, arg.consonne, arg.out, arg.output);
   pthread_t producer;
   pthread_t consumer[arg.nthreads];
-  pthread_t consumer1;
+  //pthread_t consumer1;
   int err;
   err = pthread_create(&(producer), NULL,producer_routine,(void *) arg.input);
   if(err!=0){
     printf("pthread_create producer");
   }
-
+int tru = 1;
   for(int j=0;j<arg.nthreads;j=j+1){
-    err =   pthread_create(&(consumer[j]), NULL,consumer_routine,NULL);
+    err =   pthread_create(&(consumer[j]), NULL,consumer_routine,&tru);
     if(err!=0){
       printf("pthread_create consumer_prod");
     }
   }
-
-  err = pthread_create(&(consumer1), NULL, tri_String, NULL);
+/*int tru1 = 1;
+  err = pthread_create(&(consumer1), NULL, tri_String, &tru1);
   if(err!=0){
     printf("pthread_create consumer1");
-  }
+  }*/
 
   err = pthread_join(producer,NULL);
   if(err!=0){
     printf("pthread_join producer");
   }
 
-  err = pthread_join(consumer1, NULL);
-  if(err!=0){
-    printf("pthread_join consumer");
-  }
-
   for(int l=0;l<arg.nthreads;l=l+1){
     err = pthread_join(consumer[l],NULL);
-        printf("un l est join");
     if(err!=0){
       printf("pthread_join consumer_prod");
     }
   }
 
+  /*err = pthread_join(consumer1, NULL);
+  if(err!=0){
+    printf("pthread_join consumer");
+  }*/
+
   err = pthread_mutex_destroy(&(tab_circulaire->mutex));
   if(err!=0){
     printf("pthread_mutex_destroy mutex");
   }
-  err = pthread_mutex_destroy(&(tab_circulaire->mutex1));
+  /*err = pthread_mutex_destroy(&(tab_circulaire1->mutex1));
   if(err!=0){
     printf("pthread_mutex_destroy mutex1");
-  }
+  }*/
+
   sem_destroy(&(tab_circulaire->empty));
   sem_destroy(&(tab_circulaire->full));
-  sem_destroy(&(tab_circulaire->empty1));
-  sem_destroy(&(tab_circulaire->full1));
+  //sem_destroy(&(tab_circulaire1->empty1));
+  //sem_destroy(&(tab_circulaire1->full1));
 
-  print_stack(tab_circulaire->stack_fin);
-
-  free(tab_circulaire);
+  //print_stack(tab_circulaire1->stack_fin);
+  //free(tab_circulaire->file_out);
+  //free(tab_circulaire);
   return 0;
 }
 

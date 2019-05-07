@@ -1,64 +1,72 @@
 #include "consumer.h"
 
 
-void* tri_String(){
+void* tri_String(void * tru1){
+  int *tru_cons= tru1;
 
-  while(tab_circulaire->in1 != tab_circulaire->out1 || tab_circulaire->boucle_cons1!=tab_circulaire->nbrt){
+  while(*tru_cons==1){
+    printf("0c\n");
 
+    sem_wait(&(tab_circulaire1->full1));
 
-    sem_wait(&(tab_circulaire->full1));
+    printf("1c\n");
 
-    pthread_mutex_lock(&(tab_circulaire->mutex1));
+    pthread_mutex_lock(&(tab_circulaire1->mutex1));
 
+    printf("2c\n");
 
-
-    char * str = deleteString_Buff();
-    //printf("%s\n",str);
-    if(stack_get_size(tab_circulaire->stack_fin)==0){
-      stack_push(tab_circulaire->stack_fin, str, strlen(str));
-    }
-    else{
-
-      if(count(str, tab_circulaire->consonne)== count(tab_circulaire->stack_fin->head->data, tab_circulaire->consonne)){
-        // pop
-        stack_push(tab_circulaire->stack_fin,str,strlen(str));
+    if(tab_circulaire1->in1 != tab_circulaire1->out1 || tab_circulaire1->boucle_cons1!=tab_circulaire1->nbrt1){
+      char * str = deleteString_Buff();
+      //printf("%s\n",str);
+      if(stack_get_size(tab_circulaire1->stack_fin)==0){
+        stack_push(tab_circulaire1->stack_fin, str, strlen(str));
       }
-
-      else if(count(str, tab_circulaire->consonne)>count(tab_circulaire->stack_fin->head->data, tab_circulaire->consonne)){
-        while (tab_circulaire->stack_fin->size != 0){
-          stack_pop(tab_circulaire->stack_fin, strlen(tab_circulaire->stack_fin->head->data));
-        }
-        stack_push(tab_circulaire->stack_fin,str,strlen(str));
-      }
-
       else{
 
+        if(count(str, tab_circulaire1->consonne)== count(tab_circulaire1->stack_fin->head->data, tab_circulaire1->consonne)){
+          // pop
+          stack_push(tab_circulaire1->stack_fin,str,strlen(str));
+        }
+
+        else if(count(str, tab_circulaire1->consonne)>count(tab_circulaire1->stack_fin->head->data, tab_circulaire1->consonne)){
+          while (tab_circulaire1->stack_fin->size != 0){
+            stack_pop(tab_circulaire1->stack_fin, strlen(tab_circulaire1->stack_fin->head->data));
+          }
+          stack_push(tab_circulaire1->stack_fin,str,strlen(str));
+        }
+        else{
+
+        }
+
       }
-
     }
+    else{
+      *tru_cons = 0;
+    }
+    printf("3c\n");
 
-    pthread_mutex_unlock(&(tab_circulaire->mutex1));
+    pthread_mutex_unlock(&(tab_circulaire1->mutex1));
 
-    sem_post(&(tab_circulaire->empty1));
-
- }
- printf("3cons\n");
+    sem_post(&(tab_circulaire1->empty1));
+    printf("4c\n");
+  }
+  printf("5c\n");
   return NULL;
 }
 
 // un méthhode print.
 
 void print_stack(stack_t* s){
-  if(tab_circulaire->out_true==1){
-     int file = open(tab_circulaire->file_out, O_WRONLY | O_CREAT);
+  if(tab_circulaire1->out_true==1){
+     int file = open(tab_circulaire1->file_out, O_WRONLY | O_CREAT);
     while(stack_get_size(s)!=0){
-      write(file,(char *)stack_pop(s, strlen(tab_circulaire->stack_fin->head->data)+1),sizeof(char)*strlen(tab_circulaire->stack_fin->head->data)+1);
+      write(file,(char *)stack_pop(s, strlen(tab_circulaire1->stack_fin->head->data)+1),sizeof(char)*strlen(tab_circulaire1->stack_fin->head->data)+1);
     }
     close(file);
   }
   else{
     while(stack_get_size(s)!=0){
-      printf("%s\n",(char *)stack_pop(s, strlen(tab_circulaire->stack_fin->head->data)+1));
+      printf("%s\n",(char *)stack_pop(s, strlen(tab_circulaire1->stack_fin->head->data)+1));
     }
   }
     destroy_cons();

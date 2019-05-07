@@ -15,27 +15,25 @@ void* producer_routine(void* stack){
 
     int tru = 1;
     while(tru==1){
+
       uint8_t *buf = malloc(32);
       if(fread(buf, 32, 1, f)>0){
 
         sem_wait(&(tab_circulaire->empty));
         pthread_mutex_lock(&(tab_circulaire->mutex));
-
         ajoutByte_buff(buf);
 
+        free(buf);
         pthread_mutex_unlock(&(tab_circulaire->mutex));
         sem_post(&(tab_circulaire->full));
 
-        buf = NULL;
-        free(buf);
       }
       else{
         tru=0;
-        tab_circulaire->boucle_cons=0;
       }
-      free(buf);
     }
   }
+  sem
   stack_destroy(stack);
   return NULL;
 }

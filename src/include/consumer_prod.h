@@ -10,7 +10,7 @@
 
 #include "reverse.h"
 #include "buffer.h"
+#include "buffer1.h"
 
-
-void* consumer_routine();
+void* consumer_routine(void * tru_cons_prod);
 #endif

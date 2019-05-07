@@ -17,6 +17,7 @@
 
 #include <semaphore.h>
 #include <pthread.h>
+#include <buffer1.h>
 
 /* permet de récupérer les arguments */
 typedef struct args_t {

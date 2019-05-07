@@ -3,8 +3,8 @@ INCF=src/include
 CFLAGS=-Wall -Werror -DC99 -pthread -ICTester -g -std=c99 -I $(INCF)
 
 
-OBJ=buffer.o stack.o producer.o reverse.o sha256.o consumer_prod.o consumer.o
-SRC= src/buffer.c src/stack.c src/producer.c src/reverse.c src/sha256.c src/consumer_prod.c src/consumer.c
+OBJ=buffer.o stack.o producer.o reverse.o sha256.o consumer_prod.o consumer.o buffer1.o
+SRC= src/buffer.c src/stack.c src/producer.c src/reverse.c src/sha256.c src/consumer_prod.c src/consumer.c src/buffer1.c
 
 
 all: $(OBJ) cracker
