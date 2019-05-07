@@ -12,16 +12,19 @@ void* tri_String(void * tru1){
 
 
     if(tab_circulaire1->in1 != tab_circulaire1->out1 || tab_circulaire1->boucle_cons1!=tab_circulaire1->nbrt1){
-      char * str = deleteString_Buff();
+      char * str = malloc(sizeof(char)*17);
+      deleteString_Buff(str);
       //printf("%s\n",str);
       if(stack_get_size(tab_circulaire1->stack_fin)==0){
         stack_push(tab_circulaire1->stack_fin, str, strlen(str));
+        free(str);
       }
       else{
 
         if(count(str, tab_circulaire1->consonne)== count(tab_circulaire1->stack_fin->head->data, tab_circulaire1->consonne)){
           // pop
           stack_push(tab_circulaire1->stack_fin,str,strlen(str));
+          free(str);
         }
 
         else if(count(str, tab_circulaire1->consonne)>count(tab_circulaire1->stack_fin->head->data, tab_circulaire1->consonne)){
@@ -29,9 +32,10 @@ void* tri_String(void * tru1){
             stack_pop(tab_circulaire1->stack_fin, strlen(tab_circulaire1->stack_fin->head->data));
           }
           stack_push(tab_circulaire1->stack_fin,str,strlen(str));
+          free(str);
         }
         else{
-
+          free(str);
         }
 
       }

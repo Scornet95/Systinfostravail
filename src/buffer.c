@@ -1,5 +1,4 @@
 #include "buffer.h"
-#include <inttypes.h>
 
 
 void init_buf(int numb_threads){

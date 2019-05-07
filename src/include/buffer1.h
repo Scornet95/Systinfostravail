@@ -35,7 +35,7 @@ void init_buf_string(int nthread, int consonne, int arg_output, char* output);
 
 void ajoutString_Buff(char * str);
 
-char * deleteString_Buff();
+void deleteString_Buff(char * temp);
 
 void destroy_cons();
 

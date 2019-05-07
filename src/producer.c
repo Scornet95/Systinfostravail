@@ -1,5 +1,5 @@
 #include "producer.h"
-#include <inttypes.h>
+
 
 void* producer_routine(void* stack){
   stack_t* new_stack = (stack_t*) stack;

@@ -56,11 +56,9 @@ void ajoutString_Buff(char * str){
   tab_circulaire1->out1 = ((tab_circulaire1->out1)+1)%(tab_circulaire1->length/2);
 }
 
-char * deleteString_Buff(){
-  char* temp = malloc(sizeof(char)*17);
+void deleteString_Buff(char * temp){
   memcpy(temp,tab_circulaire1->buf[tab_circulaire1->in1], 17);
   tab_circulaire1->in1 = ((tab_circulaire1->in1)+1) % (tab_circulaire1->length/2);
-  return temp;
 }
 void destroy_cons(){
   for(int i=0; i<(tab_circulaire1->length)/2; i++){

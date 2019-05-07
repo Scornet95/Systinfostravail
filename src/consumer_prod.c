@@ -1,5 +1,4 @@
 #include "consumer_prod.h"
-#include <inttypes.h>
 
 
 void* consumer_routine(void * tru_cons_prod){
