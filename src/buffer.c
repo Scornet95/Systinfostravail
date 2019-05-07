@@ -1,4 +1,5 @@
 #include "buffer.h"
+#include <inttypes.h>
 
 
 void init_buf(int numb_threads){
@@ -10,10 +11,9 @@ void init_buf(int numb_threads){
   tab_circulaire->nbrt = numb_threads;
   tab_circulaire->in = 0;
   tab_circulaire->out = 0;
+  tab_circulaire->count=0;
+  tab_circulaire->i=0;
   tab_circulaire->boucle_cons=1;
-  tab_circulaire->nbr=0;
-  tab_circulaire->tru_cons_prod=1;
-  tab_circulaire->boucle_cons1=0;
 
 
   int err;
@@ -46,14 +46,16 @@ void init_buf(int numb_threads){
 }
 
 void ajoutByte_buff(uint8_t *t){
-  tab_circulaire->buffer[tab_circulaire->out]=t;
+  //printf("%" PRIu8 " le uint8_t\n", t[0]);
+  memcpy(tab_circulaire->buffer[tab_circulaire->out], t, 32);
   tab_circulaire->out = ((tab_circulaire->out)+1) % tab_circulaire->length;
 }
 
 uint8_t* deleteByte_buff(){
   uint8_t* temp = malloc(sizeof(uint8_t)*32);
-  temp = tab_circulaire->buffer[tab_circulaire->in];
+  memcpy(temp,tab_circulaire->buffer[tab_circulaire->in], 32);
   tab_circulaire->in = ((tab_circulaire->in)+1) % tab_circulaire->length;
+
   return temp;
 }
 

@@ -5,11 +5,8 @@ void* tri_String(void * tru1){
   int *tru_cons= tru1;
 
   while(*tru_cons==1){
-    printf("0c\n");
 
     sem_wait(&(tab_circulaire1->full1));
-
-    printf("1c\n");
 
     pthread_mutex_lock(&(tab_circulaire1->mutex1));
 

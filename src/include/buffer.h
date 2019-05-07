@@ -17,10 +17,10 @@ typedef struct arg_buffer{
   int out;
   int length;
   int nbrt;
-  int boucle_cons;
-  int boucle_cons1;
   int nbr;
-  int tru_cons_prod;
+  int count;
+  int i;
+  int boucle_cons;
   sem_t empty;
   sem_t full;
   pthread_mutex_t mutex;

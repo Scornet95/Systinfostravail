@@ -22,7 +22,7 @@ void init_buf_string(int nthread, int consonne, int arg_output, char* output){
   if(err!=0){
     printf("sem_init empty1");
   }
-  
+
  printf("init\n");
 
   err = sem_init(&(tab_circulaire1->full1), 0, 0);
@@ -52,6 +52,7 @@ void init_buf_string(int nthread, int consonne, int arg_output, char* output){
 }
 
 void ajoutString_Buff(char * str){
+  memcpy(tab_circulaire1->buf[tab_circulaire->out], str, 16);
   tab_circulaire1->buf[tab_circulaire1->out1]=  str;
   tab_circulaire1->out1 = ((tab_circulaire1->out1)+1)%(tab_circulaire1->length/2);
 }
