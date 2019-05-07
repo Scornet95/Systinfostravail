@@ -30,13 +30,12 @@ void* producer_routine(void* stack){
         tru=0;
         tab_circulaire->boucle_cons=0;
       }
-
-
       pthread_mutex_unlock(&(tab_circulaire->mutex));
       sem_post(&(tab_circulaire->full));
     }
-
+    free(fichier);
   }
-  stack_destroy(stack);
+
+  free(new_stack);
   return NULL;
 }
