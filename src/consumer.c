@@ -10,7 +10,6 @@ void* tri_String(void * tru1){
 
     pthread_mutex_lock(&(tab_circulaire1->mutex1));
 
-    printf("2c\n");
 
     if(tab_circulaire1->in1 != tab_circulaire1->out1 || tab_circulaire1->boucle_cons1!=tab_circulaire1->nbrt1){
       char * str = deleteString_Buff();
@@ -40,14 +39,14 @@ void* tri_String(void * tru1){
     else{
       *tru_cons = 0;
     }
-    printf("3c\n");
+    //printf("3c\n");
 
     pthread_mutex_unlock(&(tab_circulaire1->mutex1));
 
     sem_post(&(tab_circulaire1->empty1));
-    printf("4c\n");
+    //printf("4c\n");
   }
-  printf("5c\n");
+  //printf("5c\n");
   return NULL;
 }
 

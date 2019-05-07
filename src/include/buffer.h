@@ -33,7 +33,7 @@ void init_buf(int numb_threads);
 
 void ajoutByte_buff(uint8_t *t);
 
-uint8_t* deleteByte_buff();
+void deleteByte_buff(uint8_t* temp);
 
 void destroy_buffer_prod_cons();
 

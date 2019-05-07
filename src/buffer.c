@@ -46,17 +46,13 @@ void init_buf(int numb_threads){
 }
 
 void ajoutByte_buff(uint8_t *t){
-  //printf("%" PRIu8 " le uint8_t\n", t[0]);
   memcpy(tab_circulaire->buffer[tab_circulaire->out], t, 32);
   tab_circulaire->out = ((tab_circulaire->out)+1) % tab_circulaire->length;
 }
 
-uint8_t* deleteByte_buff(){
-  uint8_t* temp = malloc(sizeof(uint8_t)*32);
+void deleteByte_buff(uint8_t* temp){
   memcpy(temp,tab_circulaire->buffer[tab_circulaire->in], 32);
   tab_circulaire->in = ((tab_circulaire->in)+1) % tab_circulaire->length;
-
-  return temp;
 }
 
 

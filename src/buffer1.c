@@ -46,20 +46,19 @@ void init_buf_string(int nthread, int consonne, int arg_output, char* output){
      exit(EXIT_FAILURE);
    }
    for(int j = 0 ; j<(tab_circulaire1->length/2); j = j+1){
-     tab_circulaire1->buf[j]= malloc(sizeof(char)*16);
+     tab_circulaire1->buf[j]= malloc(sizeof(char)*17);
    }
 
 }
 
 void ajoutString_Buff(char * str){
-  memcpy(tab_circulaire1->buf[tab_circulaire->out], str, 16);
-  tab_circulaire1->buf[tab_circulaire1->out1]=  str;
+  memcpy(tab_circulaire1->buf[tab_circulaire1->out1], str, 17);
   tab_circulaire1->out1 = ((tab_circulaire1->out1)+1)%(tab_circulaire1->length/2);
 }
 
 char * deleteString_Buff(){
-  char* temp = malloc(sizeof(char)*16);
-  temp =  tab_circulaire1->buf[tab_circulaire1->in1];
+  char* temp = malloc(sizeof(char)*17);
+  memcpy(temp,tab_circulaire1->buf[tab_circulaire1->in1], 17);
   tab_circulaire1->in1 = ((tab_circulaire1->in1)+1) % (tab_circulaire1->length/2);
   return temp;
 }
