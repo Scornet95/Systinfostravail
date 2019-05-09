@@ -26,10 +26,7 @@ void init_buf(int numb_threads){
    if(err!=0){
     printf("pthread_mutex_init");
    }
-   /*err = pthread_mutex_init(&(tab_circulaire->mutex2),NULL);
-    if(err!=0){
-     printf("pthread_mutex_init un");
-   }*/
+
 
    err = sem_init(&(tab_circulaire->empty), 0, (tab_circulaire->length));
    if(err!=0){
@@ -40,7 +37,10 @@ void init_buf(int numb_threads){
    if(err!=0){
      printf("sem_init full");
    }
-
+   err = sem_init(&(tab_circulaire->res), 0, 3);
+   if(err!=0){
+     printf("sem_init full");
+   }
 //allouer le premier buffer.
   tab_circulaire->buffer = malloc(sizeof(uint8_t *)*tab_circulaire->length);
   if (tab_circulaire->buffer == NULL){

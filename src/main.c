@@ -58,17 +58,14 @@ int tru1 = 1;
   if(err!=0){
     printf("pthread_mutex_destroy mutex1");
   }
-  err = pthread_mutex_destroy(&(tab_circulaire->mutex2));
-  if(err!=0){
-    printf("pthread_mutex_destroy mutex1");
-  }
+
 
 //destruction des sémaphore.
   sem_destroy(&(tab_circulaire->empty));
   sem_destroy(&(tab_circulaire->full));
   sem_destroy(&(tab_circulaire1->empty1));
   sem_destroy(&(tab_circulaire1->full1));
-
+  sem_destroy(&(tab_circulaire->res));
 //impression de la stack composant les string.
   print_stack(tab_circulaire1->stack_fin);
 

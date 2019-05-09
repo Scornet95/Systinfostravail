@@ -23,8 +23,10 @@ typedef struct arg_buffer{
   int boucle_cons;
   sem_t empty;
   sem_t full;
+  sem_t res;
   pthread_mutex_t mutex;
-  pthread_mutex_t mutex2;
+
+
   uint8_t  **buffer;
 }arg_buffer_t;
 

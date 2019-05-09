@@ -11,7 +11,7 @@ void* tri_String(void * tru1){
     //printf("22\n");
 
     if(tab_circulaire1->i1<tab_circulaire1->count1){ //tant qu'il y a plus qu'un élement dans le deuxième buffer.
-      printf("%d, %d, le count 1 \n",tab_circulaire1->i1,tab_circulaire1->count1);
+      //printf("%d, %d, le count 1 \n",tab_circulaire1->i1,tab_circulaire1->count1);
       char * str = malloc(sizeof(char)*17);
       deleteString_Buff(str);
       if(stack_get_size(tab_circulaire1->stack_fin)==0){ //si il n'y a pas encore délément dans la stack.
@@ -101,7 +101,7 @@ void print_stack(stack_t* s){
     while(stack_get_size(s)!=0){sem_post(&(tab_circulaire1->empty1));
       //printf("AAAAAAAAAAAAAAAAAAAAAAABBBBBBBBBBb\n");
       char* temp1 = (char *)stack_pop(s, strlen(tab_circulaire1->stack_fin->head->data)+1);
-      printf("%s \n", temp1);
+      //printf("%s \n", temp1);
       free(temp1);
     }
   }
