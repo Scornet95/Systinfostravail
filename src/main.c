@@ -58,6 +58,10 @@ int tru1 = 1;
   if(err!=0){
     printf("pthread_mutex_destroy mutex1");
   }
+  err = pthread_mutex_destroy(&(tab_circulaire->mutex2));
+  if(err!=0){
+    printf("pthread_mutex_destroy mutex1");
+  }
 
 //destruction des sémaphore.
   sem_destroy(&(tab_circulaire->empty));

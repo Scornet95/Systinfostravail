@@ -39,6 +39,7 @@ void init_buf_string(int nthread, int consonne, int arg_output, char* output){
    if(err!=0){
     printf("pthread_mutex_init un");
    }
+
  //allouer de la mémoir pour le fichier de sortie
    tab_circulaire1->file_out = malloc(sizeof(char)*strlen(output)+1);
    if(tab_circulaire1->file_out == NULL){

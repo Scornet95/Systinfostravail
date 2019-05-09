@@ -24,6 +24,7 @@ typedef struct arg_buffer{
   sem_t empty;
   sem_t full;
   pthread_mutex_t mutex;
+  pthread_mutex_t mutex2;
   uint8_t  **buffer;
 }arg_buffer_t;
 

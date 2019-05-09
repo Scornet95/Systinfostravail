@@ -16,5 +16,5 @@ $(OBJ) : $(SRC)
 	$(CC) $(CFLAGS) -c $(SRC)
 
 
-clean:
-	rm *.o *.a cracker
+#clean:
+#	rm *.o *.a cracker

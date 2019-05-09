@@ -5,10 +5,10 @@
 void* tri_String(void * tru1){
   int *tru_cons= tru1;
   while(*tru_cons==1){
-
+    printf("111\n");
     sem_wait(&(tab_circulaire1->full1));
     pthread_mutex_lock(&(tab_circulaire1->mutex1));
-
+    printf("22\n");
 
     if(tab_circulaire1->i1<tab_circulaire1->count1){ //tant qu'il y a plus qu'un élement dans le deuxième buffer.
       char * str = malloc(sizeof(char)*17);

@@ -26,6 +26,10 @@ void init_buf(int numb_threads){
    if(err!=0){
     printf("pthread_mutex_init");
    }
+   /*err = pthread_mutex_init(&(tab_circulaire->mutex2),NULL);
+    if(err!=0){
+     printf("pthread_mutex_init un");
+   }*/
 
    err = sem_init(&(tab_circulaire->empty), 0, (tab_circulaire->length));
    if(err!=0){
