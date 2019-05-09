@@ -5,10 +5,10 @@
 void* tri_String(void * tru1){
   int *tru_cons= tru1;
   while(*tru_cons==1){
-    printf("111\n");
+    //printf("111\n");
     sem_wait(&(tab_circulaire1->full1));
     pthread_mutex_lock(&(tab_circulaire1->mutex1));
-    printf("22\n");
+    //printf("22\n");
 
     if(tab_circulaire1->i1<tab_circulaire1->count1){ //tant qu'il y a plus qu'un élement dans le deuxième buffer.
       char * str = malloc(sizeof(char)*17);
@@ -78,7 +78,6 @@ void* tri_String(void * tru1){
     }
     else{ // si le consumer_prod n'a pas fini de mettre tous les string dans le deuxième buffer.
       pthread_mutex_unlock(&(tab_circulaire1->mutex1));
-
       sem_post(&(tab_circulaire1->empty1));
     }
 
@@ -98,9 +97,9 @@ void print_stack(stack_t* s){
     close(file);
   }
   else{
-    while(stack_get_size(s)!=0){
+    while(stack_get_size(s)!=0){sem_post(&(tab_circulaire1->empty1));
+      //printf("AAAAAAAAAAAAAAAAAAAAAAABBBBBBBBBBb\n");
       char* temp1 = (char *)stack_pop(s, strlen(tab_circulaire1->stack_fin->head->data)+1);
-      printf("%s\n",temp1);
       free(temp1);
     }
   }
