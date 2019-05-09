@@ -11,7 +11,7 @@ void* consumer_routine(void * tru_cons_prod){
 
       pthread_mutex_lock(&(tab_circulaire->mutex));
 
-      if(tab_circulaire->i<tab_circulaire->count ){ //tant qu'il y a plus qu'un élement dans le premier buffer..
+      if(tab_circulaire->i<=tab_circulaire->count ){ //tant qu'il y a plus qu'un élement dans le premier buffer..
         char* res = malloc(sizeof(char)*16+1);
         uint8_t* tab32 = malloc(sizeof(uint8_t)*32);
         deleteByte_buff(tab32);
@@ -56,26 +56,7 @@ void* consumer_routine(void * tru_cons_prod){
           return NULL;
         }
         else{// si il reste qu'un thread.
-          char* res1 = malloc(sizeof(char)*16+1);
-          uint8_t* tab321 = malloc(sizeof(uint8_t)*32);
-          deleteByte_buff(tab321);
 
-            if(reversehash(tab321, res1, 16)){
-              sem_wait(&(tab_circulaire1->empty1));
-
-              pthread_mutex_lock(&(tab_circulaire1->mutex1));
-
-              ajoutString_Buff(res1);
-              tab_circulaire1->count1 = tab_circulaire1->count1+1;
-              tab_circulaire1->boucle_cons1=0;
-
-              pthread_mutex_unlock(&(tab_circulaire1->mutex1));
-
-              sem_post(&(tab_circulaire1->full1));
-            }
-
-          free(res1);
-          free(tab321);
           *tru = 0; //permet de sortir de la boucle.
           if(tab_circulaire->boucle_cons==0 ){// si le producteur a fini de mettre tous les hash dans le premier buffer.
             pthread_mutex_unlock(&(tab_circulaire->mutex));
