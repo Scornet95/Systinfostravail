@@ -60,7 +60,6 @@ int tru1 = 1;
   print_stack(tab_circulaire1->stack_fin);
   destroy_buffer_prod_cons();
   free(tab_circulaire1->file_out);
-  stack_destroy(tab_circulaire1->stack_fin);
   free(tab_circulaire);
   free(tab_circulaire1);
 

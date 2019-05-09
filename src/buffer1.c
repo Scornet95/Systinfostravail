@@ -11,12 +11,13 @@ void init_buf_string(int nthread, int consonne, int arg_output, char* output){
   tab_circulaire1->out1=0;
   tab_circulaire1->nbrt1= nthread;
   tab_circulaire1->out_true=arg_output;
-  tab_circulaire1->boucle_cons1=0;
+  tab_circulaire1->boucle_cons1=1;
   tab_circulaire1->consonne=consonne;
   tab_circulaire1->length = (2*nthread);
   tab_circulaire1->stack_fin = stack_init();
   tab_circulaire1->tru_cons=1;
-
+  tab_circulaire1->count1=0;
+  tab_circulaire1->i1=0;
   int err;
   err = sem_init(&(tab_circulaire1->empty1), 0, (tab_circulaire1->length)/2);
   if(err!=0){

@@ -3,11 +3,12 @@
 
 void* producer_routine(void* stack){
   stack_t* new_stack = (stack_t*) stack;
+ FILE* f;
 
-  while (new_stack->size != 0){;
+  while (new_stack->size != 0){
     char *fichier = stack_pop(new_stack, strlen(new_stack->head->data));
+    f = fopen(fichier, "rb");
 
-    FILE* f = fopen(fichier, "rb");
 
     if (f == NULL){
 
@@ -29,13 +30,15 @@ void* producer_routine(void* stack){
       else{
         tru=0;
         tab_circulaire->boucle_cons=0;
+        free(buf);
       }
       pthread_mutex_unlock(&(tab_circulaire->mutex));
       sem_post(&(tab_circulaire->full));
     }
     free(fichier);
+    //free(f);
   }
-
-  free(new_stack);
+  fclose(f);
+  stack_destroy(new_stack);
   return NULL;
 }

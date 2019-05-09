@@ -19,6 +19,8 @@ void* tri_String(void * tru1);
 
 void print_stack(stack_t* s);
 
+char* concat(const char *s1, const char *s2);
+
 int count(char* str, int consonne);
 
 #endif

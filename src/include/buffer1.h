@@ -21,6 +21,8 @@ typedef struct arg_buffer_string{
   int consonne;
   int length;
   int tru_cons;
+  int count1;
+  int i1;
   stack_t* stack_fin;
   sem_t empty1;
   sem_t full1;
