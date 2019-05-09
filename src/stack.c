@@ -1,7 +1,8 @@
 
 #include "stack.h"
 
-
+//pré:rien.
+//post:initialise une stack.
 stack_t* stack_init(void) {
 	stack_t* s = (stack_t*) malloc(sizeof(stack_t));
 	s->head = NULL;
@@ -9,11 +10,13 @@ stack_t* stack_init(void) {
 
 	return s;
 }
-
+//pré: une stack en entrée.
+//post:le nombre d'élément dans la stack.
 size_t stack_get_size(stack_t* s) {
 	return s->size;
 }
-
+//pré: une stack, une donné et la taille de la donné.
+//post: ajouté l'élément sur la tête de la stack.
 int stack_push(stack_t* s, void* data, size_t data_size) {
 	if (s == NULL) return -2;
 
@@ -33,6 +36,8 @@ int stack_push(stack_t* s, void* data, size_t data_size) {
 	return 0;
 }
 
+//pré:une stack, la taille de l'élément à la tête de la stack.
+//post:return l'élément à la tête de la stack.
 void* stack_peek(stack_t* s, size_t data_size) {
 	if (s == NULL) return NULL;
 	if (s->head == NULL) return NULL;
@@ -44,6 +49,8 @@ void* stack_peek(stack_t* s, size_t data_size) {
 	return ret;
 }
 
+//pré:une stack et la taille de l'élément qui va être enlevé.
+//post:enlève l'élément à la tête de la stack et il le retourne.
 void* stack_pop(stack_t* s, size_t data_size) {
 	if (s == NULL) return NULL;
 	if (s->head == NULL) return NULL;
@@ -58,10 +65,11 @@ void* stack_pop(stack_t* s, size_t data_size) {
 
 	free(old_head->data);
 	free(old_head);
-	
+
 	return ret;
 }
-
+//pré: une stack.
+//post:détruit//free la stack.
 int stack_destroy(stack_t* s) {
 	if (s == NULL) return -2;
 	if (s->head != NULL) return -2;
